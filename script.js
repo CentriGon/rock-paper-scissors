@@ -1,6 +1,9 @@
+let playerPoints = 0;
+let computerPoints = 0;
+
+
 function getComputerChoice() {
     let x = Math.random() * 3;
-    console.log(x);
     if (x <= 1 ) {
         return "rock";
     }
@@ -20,8 +23,6 @@ function playerChoice() {
 function playRound() {
     let userInput = playerChoice().toLowerCase();
     let compInput = getComputerChoice().toLowerCase();
-    console.log(userInput);
-    console.log(compInput);
 
     if ((userInput == "rock" && compInput == "rock") || ((userInput == "paper" && compInput == "paper")) || ((userInput == "scissor" && compInput == "scissor"))) {
         console.log("It is a tie!");
@@ -29,26 +30,44 @@ function playRound() {
 
     if ((userInput == "rock") && (compInput == "paper")) {
         console.log("you lose, paper beats rock!");
+        computerPoints++;
     }
     else if ((userInput == "paper") && (compInput == "rock")) {
         console.log("you win, paper beats rock!");
+        playerPoints++;
     }
     else if ((userInput == "paper") && (compInput == "scissor")) {
         console.log("you lose, scissor beats paper!");
+        computerPoints++;
     }
     else if ((userInput == "scissor") && (compInput == "paper")) {
         console.log("you win, scissor beats paper!");
+        playerPoints++;
     }
     else if ((userInput == "rock") && (compInput == "scissor")) {
         console.log("you win, rock beats scissor!");
+        playerPoints++;
     }
     else if ((userInput == "scissor") && (compInput == "rock")) {
         console.log("you lose, rock beats scissor!");
+        computerPoints++;
     }
 
 }
 
-playRound();
+function playGame() {
+    while (playerPoints < 3 && computerPoints < 3) {
+    playRound();
+    console.log("Your Points: " + playerPoints);
+    console.log("Computer Points: " + computerPoints);
+    }
 
+    if (playerPoints > computerPoints) {
+        console.log("You Win!");
+    }
+    else {
+        console.log("You lose!");
+    }
+}
 
-
+playGame();
