@@ -1,6 +1,18 @@
 let playerPoints = 0;
 let computerPoints = 0;
 
+const playerRock = document.querySelector('#rock');
+const playerScissor = document.querySelector('#scissor');
+const playerPaper = document.querySelector('#paper');
+const results = document.querySelector('.results');
+
+playerRock.addEventListener('click', () =>  { playRound('rock')});
+playerPaper.addEventListener('click', () =>  { playRound('paper')});
+playerScissor.addEventListener('click', () =>  { playRound('scissor')});
+
+
+
+
 
 function getComputerChoice() {
     let x = Math.random() * 3;
@@ -15,17 +27,12 @@ function getComputerChoice() {
     }
 }
 
-function playerChoice() {
-    let p = 0;
-        return (prompt("Please enter in rock, paper, or scissors"));
-}
-
-function playRound() {
-    let userInput = playerChoice().toLowerCase();
+function playRound(userInput) {
     let compInput = getComputerChoice().toLowerCase();
 
     if ((userInput == "rock" && compInput == "rock") || ((userInput == "paper" && compInput == "paper")) || ((userInput == "scissor" && compInput == "scissor"))) {
         console.log("It is a tie!");
+
     }
 
     if ((userInput == "rock") && (compInput == "paper")) {
@@ -34,7 +41,10 @@ function playRound() {
     }
     else if ((userInput == "paper") && (compInput == "rock")) {
         console.log("you win, paper beats rock!");
+        results.classList.toggle('active');
         playerPoints++;
+        
+
     }
     else if ((userInput == "paper") && (compInput == "scissor")) {
         console.log("you lose, scissor beats paper!");
@@ -70,4 +80,4 @@ function playGame() {
     }
 }
 
-playGame();
+
