@@ -30,53 +30,49 @@ function getComputerChoice() {
 function playRound(userInput) {
     let compInput = getComputerChoice().toLowerCase();
 
+    const x = "Computer Points: " + computerPoints + "\nPlayer Points: " + playerPoints;
+
     if ((userInput == "rock" && compInput == "rock") || ((userInput == "paper" && compInput == "paper")) || ((userInput == "scissor" && compInput == "scissor"))) {
-        console.log("It is a tie!");
-
+        const xy = (userInput.substring(0,1).toUpperCase() + userInput.substring(1)) + " vs " + (compInput.substring(0,1).toUpperCase() + compInput.substring(1)) + ": Draw!\n" + x;
+        results.textContent = xy;
     }
-
-    if ((userInput == "rock") && (compInput == "paper")) {
-        console.log("you lose, paper beats rock!");
+    else if ((userInput == "rock") && (compInput == "paper")) {
+        results.textContent = 'You lose, Paper beats Rock!\n' + x;
         computerPoints++;
     }
     else if ((userInput == "paper") && (compInput == "rock")) {
-        console.log("you win, paper beats rock!");
-        results.classList.toggle('active');
+        results.textContent = 'You win, Paper beats Rock!\n' + x;
         playerPoints++;
-        
-
     }
     else if ((userInput == "paper") && (compInput == "scissor")) {
-        console.log("you lose, scissor beats paper!");
+        results.textContent = 'You lose, Scissor Beats Paper!\n' + x;
         computerPoints++;
     }
     else if ((userInput == "scissor") && (compInput == "paper")) {
-        console.log("you win, scissor beats paper!");
+        results.textContent = 'You win, Scissor beats Paper!\n' + x;
         playerPoints++;
     }
     else if ((userInput == "rock") && (compInput == "scissor")) {
-        console.log("you win, rock beats scissor!");
+        results.textContent = 'You win, Rock beats Scissor\n' + x;
         playerPoints++;
     }
     else if ((userInput == "scissor") && (compInput == "rock")) {
-        console.log("you lose, rock beats scissor!");
+        results.textContent = 'You lose, Rock Beats Scissor!\n' + x;
         computerPoints++;
     }
 
+    playGame();
 }
 
 function playGame() {
-    while (playerPoints < 3 && computerPoints < 3) {
-    playRound();
-    console.log("Your Points: " + playerPoints);
-    console.log("Computer Points: " + computerPoints);
-    }
+    const score = document.createElement('div');
+    score.textContent = "Player Points: " + playerPoints;
 
-    if (playerPoints > computerPoints) {
-        console.log("You Win!");
+    if (playerPoints > 3) {
+        results.textContent = "You win!";
     }
-    else {
-        console.log("You lose!");
+    else if (computerPoints > 3) {
+        results.textContent = "You Lose!";
     }
 }
 
